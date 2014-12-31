@@ -94,8 +94,8 @@
     	$arr = array('name'=>'reply',
     		'data'=>array(
     			'cid'=>5,
-    			'uid'=>'1',
-    			'content'=>'1',  			
+    			'mid'=>'1',
+    			'content'=>'我能完成这个任务',  			
     			'token' =>'abc123'
     			)
     		);

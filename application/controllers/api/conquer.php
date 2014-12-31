@@ -92,10 +92,13 @@ class Conquer extends Api_Controller
 
 
 		/**录入**/
-		if(!empty($uid) && !empty($id) && !empty($content)){
+		if(!empty($mid) && !empty($cid) && !empty($content)){
 			$mdata['cid'] = $cid;
 			$mdata['mid'] = $mid;
 			$mdata['content'] = $content;
+			$mdata['createtime'] = time();
+			
+			$this->load->model('conquer_reply_mdl','conquer_reply');
 			if($this->conquer_reply->add($mdata)){
 				$result = array('errcode'=>0,'errmsg'=>'ok');
 			}else{

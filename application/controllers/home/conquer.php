@@ -7,6 +7,7 @@ class Conquer extends Admin_Controller
 	{
 		parent::__construct();
 		$this->load->model('Conquer_mdl','conquer');
+        $this->load->model('Conquer_reply_mdl','conquer_reply');
 	}
 
     //会员列表
@@ -42,6 +43,46 @@ class Conquer extends Admin_Controller
 
 	   $this->load->view('home/home_conquer',$data);
 	}
+
+    /**
+    *
+    * @员工解答
+    **/
+
+    public function reply()
+    {
+        $page = isset($_GET['page']) ? $_GET['page'] : 0;
+        $page = ($page && is_numeric($page)) ? intval($page) : 1;
+        $id = $this->input->get('id');
+
+        $limit = 20;
+        $offset = ($page - 1) * $limit;
+        $pagination = ''; 
+        $where = array('cid'=>$id);
+        $count = $this->conquer_reply->get_count();
+       
+        $this->load->library('pagination');
+        $config['base_url'] = base_url().'index.php?d=home&c=conquer&m=reply';
+        $config['total_rows'] = $count;
+        //设置url上第几段用于传递分页器的偏移量
+        $config ['uri_segment'] = 4;
+        $config['per_page'] = $limit;
+        $config['use_page_numbers'] = TRUE;
+        $config['query_string_segment'] = 'page';
+        $this->pagination->initialize($config);
+        $data['page'] = $this->pagination->create_links();
+
+        $list = array();
+        $wherelist['page'] = true;
+        $wherelist['limit'] = $limit;
+        $wherelist['offset'] = $offset;
+        $wherelist['where'] = $where;
+        $list = $this->conquer_reply->getList($wherelist);
+        $data['list'] = $list;
+
+
+       $this->load->view('home/home_conquer_reply',$data);
+    }
 
     public function add()
     {

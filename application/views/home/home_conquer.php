@@ -63,9 +63,9 @@ function flush(msg,url){
 		?>
 		</td>
         <td>
-        <a href="<?=base_url()?>index.php?d=home&c=mod&m=index&pid=<?=$v['id']?>">模块</a> |
-		<a href="<?=base_url()?>index.php?d=home&c=project&m=update&id=<?=$v['id']?>">编辑</a> | 
-		<a href="javascript:void(0);" onClick="flush('删除后不能恢复，确定删除吗?','<?=base_url()?>index.php?d=home&c=project&m=del&id=<?=$v['id']?>');">删除</a>
+		<a href="<?=base_url()?>index.php?d=home&c=conquer&m=update&id=<?=$v['id']?>">编辑</a> | 
+		<a href="javascript:void(0);" onClick="flush('删除后不能恢复，确定删除吗?','<?=base_url()?>index.php?d=home&c=conquer&m=del&id=<?=$v['id']?>');">删除</a> |
+		<a href="<?=base_url()?>index.php?d=home&c=conquer&m=reply&id=<?=$v['id']?>">员工解答</a>
 		</td>
     </tr>
 

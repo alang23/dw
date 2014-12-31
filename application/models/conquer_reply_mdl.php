@@ -11,7 +11,7 @@ class Conquer_reply_mdl extends  CI_Model
 
 
     const TABLE = 'dw_conquer_reply';
-
+    const TABLE_MEMBER = 'dw_member';
 
     public function __construct()
     {
@@ -28,8 +28,12 @@ class Conquer_reply_mdl extends  CI_Model
             $this->db->limit(intval($config['limit']));
             $this->db->offset(intval($config['offset']));
         }
-        $list = array();     
-        $list = $this->db->get(self::TABLE)->result_array();
+        $list = array(); 
+        $list = $this->db->select('c.*,m.realname,m.headerurl')   
+                ->from(self::TABLE.' as c')
+                ->join(self::TABLE_MEMBER.' as m','m.id=c.mid','left') 
+                ->get()->result_array();
+        //$list = $this->db->get(self::TABLE)->result_array();
         return $list;
 
     }
